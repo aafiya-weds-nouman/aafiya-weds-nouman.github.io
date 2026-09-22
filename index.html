@@ -1,4 +1,5 @@
 <title>Aafiya &amp; Nouman</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap">
@@ -20,54 +21,43 @@
   --arabic:'Amiri','Scheherazade New','Traditional Arabic',serif;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{height:100%;box-sizing:border-box}
+html{box-sizing:border-box;scroll-behavior:smooth}
 body{
-  height:100%;
   margin:0;
-  overflow:hidden;
   background:var(--green-deep);
   color:var(--ink);
   font-family:var(--serif);
   font-size:17px;
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
-/* ---- deck ---- */
+/* ---- deck: a normal vertical stack of full-bleed sections ---- */
 .deck{
-  height:100%;
-  display:flex;
-  overflow-x:auto;
-  overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-  overscroll-behavior-x:contain;
+  display:block;
+  scroll-snap-type:y proximity;
 }
-.deck::-webkit-scrollbar{display:none}
 .screen{
   position:relative;
-  flex:0 0 100%;
   width:100%;
-  height:100%;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
+  min-height:100vh;
+  min-height:100dvh;
   overflow:hidden;
+  scroll-snap-align:start;
 }
 .bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .scroll{
   position:relative;
   z-index:1;
-  height:100%;
-  overflow-y:auto;
-  overflow-x:hidden;
+  min-height:100vh;
+  min-height:100dvh;
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:28px 18px 74px;
-  scrollbar-width:none;
+  justify-content:center;
+  padding:56px 18px;
 }
-.scroll::-webkit-scrollbar{display:none}
 
 /* ---- arch frame ---- */
 .frame{position:relative;width:100%;max-width:400px;margin:auto;container-type:inline-size}
@@ -251,23 +241,18 @@ h1,h2,h3,p{margin:0}
 }
 .numbox::before{content:"";position:absolute;inset:4px;border:1px solid rgba(200,168,98,.6);pointer-events:none}
 
-/* ---- navigation ---- */
-.dots{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:6px;z-index:5;pointer-events:none}
-.dots button{pointer-events:auto;width:6px;height:6px;border-radius:3px;border:0;padding:0;background:rgba(200,168,98,.45);cursor:pointer;transition:width .25s ease,background .25s ease}
-.dots button.on{width:20px;background:var(--gold)}
-.arrow{
-  position:fixed;top:50%;transform:translateY(-50%);z-index:5;
-  width:42px;height:42px;border-radius:50%;
-  border:1px solid var(--gold);background:rgba(20,36,28,.72);color:var(--gold);
-  display:none;place-items:center;cursor:pointer;padding:0;
+/* ---- scroll progress ---- */
+.progress{
+  position:fixed;top:0;left:0;z-index:10;
+  height:3px;width:0%;
+  background:var(--gold);
+  box-shadow:0 0 8px rgba(200,168,98,.6);
+  transition:width .1s linear;
 }
-.arrow svg{width:18px;height:18px}
-.arrow.prev{left:14px}.arrow.next{right:14px}
-@media (min-width:640px) and (hover:hover){.arrow{display:grid}}
 
 @media (prefers-reduced-motion:reduce){
-  .deck{scroll-behavior:auto}
-  *{transition:none !important}
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
 }
 </style>
 
@@ -401,7 +386,7 @@ h1,h2,h3,p{margin:0}
 
 <div class="deck" id="deck">
 
-  <!-- 1 · Cover -->
+  <!-- 1 . Cover -->
   <section class="screen night">
     <div class="bg">
       <svg class="crescent" viewBox="0 0 40 40" aria-hidden="true"><path d="M23 3A17 17 0 1 0 23 37A18 18 0 0 1 23 3z" fill="currentColor"/></svg>
@@ -415,7 +400,7 @@ h1,h2,h3,p{margin:0}
         <div class="inner">
           <p class="it lead">Our Wedding Invitation</p>
           <p class="caps">A special invitation to<br>our beloved family &amp; friends</p>
-          <h1 class="names initials" dir="rtl" lang="ar">ع <span class="amp">&amp;</span> ن</h1>
+          <h1 class="names initials" dir="rtl" lang="ar">&#1593; <span class="amp">&amp;</span> &#1606;</h1>
           <div>
             <p class="it small muted">In the loving memory of</p>
             <p class="lead" style="font-weight:500">Late Haji Husain Miya Bamne<br>&amp; Late Haji Murad Bamne</p>
@@ -425,8 +410,7 @@ h1,h2,h3,p{margin:0}
       </div>
     </div>
   </section>
-
-  <!-- 2 · Bismillah -->
+  <!-- 2 . Bismillah -->
   <section class="screen cream">
     <div class="bg">
       <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
@@ -439,18 +423,18 @@ h1,h2,h3,p{margin:0}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <p class="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+          <p class="ar">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1649;&#1604;&#1604;&#1614;&#1617;&#1607;&#1616; &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1614;&#1606;&#1616; &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1605;&#1616;</p>
           <p class="lead">In the name of Allah,<br>the Most Gracious, the Most Merciful</p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
-          <p class="it lead">“And We created you in pairs...”</p>
-          <p class="small muted">(Qur’an 78:8)</p>
+          <p class="it lead">&ldquo;And We created you in pairs...&rdquo;</p>
+          <p class="small muted">(Qur&rsquo;an 78:8)</p>
           <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3 · Invitation -->
+  <!-- 3 . Invitation -->
   <section class="screen cream">
     <div class="bg">
       <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
@@ -475,7 +459,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <!-- 4 · Families -->
+  <!-- 4 . Families -->
   <section class="screen cream">
     <div class="bg">
       <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
@@ -490,11 +474,11 @@ h1,h2,h3,p{margin:0}
           <p class="lead">With the blessings of</p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <div>
-            <p class="label">Bride’s Father</p>
+            <p class="label">Bride&rsquo;s Father</p>
             <p class="big">Mehmood Husain Miya Bamne</p>
           </div>
           <div>
-            <p class="label">Groom’s Father</p>
+            <p class="label">Groom&rsquo;s Father</p>
             <p class="big">Niyaz Tajuddin Fakih</p>
           </div>
           <div>
@@ -508,8 +492,7 @@ h1,h2,h3,p{margin:0}
       </div>
     </div>
   </section>
-
-  <!-- 5 · Wedding Events -->
+  <!-- 5 . Wedding Events -->
   <section class="screen cream">
     <div class="bg">
       <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
@@ -544,7 +527,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <!-- 6 · Countdown -->
+  <!-- 6 . Countdown -->
   <section class="screen night">
     <div class="bg">
       <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
@@ -560,21 +543,20 @@ h1,h2,h3,p{margin:0}
           <p class="lead">Countdown to</p>
           <h2 class="title">Nikah</h2>
           <div class="cd" id="clock" data-target="2026-11-07T17:00:00+05:30">
-            <div><b id="cd-d">—</b><small>Days</small></div>
-            <div><b id="cd-h">—</b><small>Hours</small></div>
-            <div><b id="cd-m">—</b><small>Minutes</small></div>
-            <div><b id="cd-s">—</b><small>Seconds</small></div>
+            <div><b id="cd-d">&mdash;</b><small>Days</small></div>
+            <div><b id="cd-h">&mdash;</b><small>Hours</small></div>
+            <div><b id="cd-m">&mdash;</b><small>Minutes</small></div>
+            <div><b id="cd-s">&mdash;</b><small>Seconds</small></div>
           </div>
-          <p class="big">7th November 2026<br><span style="font-weight:400;font-size:.9em">Saturday &nbsp;·&nbsp; 5:00 PM</span></p>
+          <p class="big">7th November 2026<br><span style="font-weight:400;font-size:.9em">Saturday &nbsp;&middot;&nbsp; 5:00 PM</span></p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
-          <p class="it lead">“Two hearts, one Deen,<br>a lifetime together.”</p>
+          <p class="it lead">&ldquo;Two hearts, one Deen,<br>a lifetime together.&rdquo;</p>
           <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- 7 · Venue -->
+  <!-- 7 . Venue -->
   <section class="screen cream">
     <div class="bg">
       <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
@@ -624,7 +606,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <!-- 8 · Dress Code -->
+  <!-- 8 . Dress Code -->
   <section class="screen cream">
     <div class="bg">
       <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
@@ -649,8 +631,7 @@ h1,h2,h3,p{margin:0}
       </div>
     </div>
   </section>
-
-  <!-- 9 · RSVP -->
+  <!-- 9 . RSVP -->
   <section class="screen cream">
     <div class="bg">
       <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
@@ -676,7 +657,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <!-- 10 · Blessing -->
+  <!-- 10 . Blessing -->
   <section class="screen dusk">
     <div class="bg">
       <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
@@ -687,7 +668,7 @@ h1,h2,h3,p{margin:0}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <p class="ar">ٱلْحَمْدُ لِلَّٰهِ</p>
+          <p class="ar">&#1649;&#1604;&#1652;&#1614;&#1605;&#1618;&#1583;&#1615; &#1604;&#1616;&#1604;&#1614;&#1617;&#1614;&#1617;&#1607;&#1616;</p>
           <p class="lead">May Allah bring barakah<br>in our union and make our journey<br>together filled with love, happiness<br>and endless blessings.</p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it lead">With love,</p>
@@ -699,7 +680,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <!-- 11 · JazakAllah -->
+  <!-- 11 . JazakAllah -->
   <section class="screen night">
     <div class="bg">
       <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
@@ -713,7 +694,7 @@ h1,h2,h3,p{margin:0}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <p class="ar">ٱلْحَمْدُ لِلَّٰهِ</p>
+          <p class="ar">&#1649;&#1604;&#1652;&#1614;&#1605;&#1618;&#1583;&#1615; &#1604;&#1616;&#1604;&#1614;&#1617;&#1614;&#1617;&#1607;&#1616;</p>
           <h2 class="names" style="font-size:clamp(2.4rem,11vw,3.2rem)">JazakAllah</h2>
           <p class="lead">for being a part of<br>our special day</p>
           <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
@@ -727,50 +708,32 @@ h1,h2,h3,p{margin:0}
   </section>
 
 </div>
-
-<button class="arrow prev" type="button" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24" style="transform:scaleX(-1)"><use href="#i-chev"/></svg></button>
-<button class="arrow next" type="button" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
-<div class="dots" id="dots" role="tablist" aria-label="Pages"></div>
+<div class="progress" id="progress"></div>
 
 <audio id="music" src="music.mp3" loop preload="none"></audio>
 
 <script>
 (function(){
   var deck = document.getElementById('deck');
-  var screens = Array.prototype.slice.call(deck.querySelectorAll('.screen'));
-  var dots = document.getElementById('dots');
-
-  screens.forEach(function(_, i){
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-label', 'Page ' + (i + 1));
-    b.addEventListener('click', function(){ go(i); });
-    dots.appendChild(b);
-  });
-  var dotEls = Array.prototype.slice.call(dots.children);
-
-  function current(){ return Math.round(deck.scrollLeft / deck.clientWidth); }
-  function go(i){
-    i = Math.max(0, Math.min(screens.length - 1, i));
-    deck.scrollTo({ left: i * deck.clientWidth, behavior: 'smooth' });
-  }
-  function paint(){
-    var c = current();
-    dotEls.forEach(function(d, i){ d.classList.toggle('on', i === c); });
-  }
 
   deck.querySelectorAll('[data-next]').forEach(function(b){
-    b.addEventListener('click', function(){ go(current() + 1); });
+    b.addEventListener('click', function(){
+      var host = b.closest('.screen');
+      var next = host && host.nextElementSibling;
+      if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
-  document.getElementById('prev').addEventListener('click', function(){ go(current() - 1); });
-  document.getElementById('next').addEventListener('click', function(){ go(current() + 1); });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'ArrowRight') go(current() + 1);
-    if (e.key === 'ArrowLeft') go(current() - 1);
-  });
-  deck.addEventListener('scroll', paint, { passive: true });
-  window.addEventListener('resize', function(){ go(current()); });
-  paint();
+
+  /* scroll progress bar */
+  var bar = document.getElementById('progress');
+  function paintProgress(){
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', paintProgress, { passive: true });
+  window.addEventListener('resize', paintProgress);
+  paintProgress();
 
   /* countdown */
   var clock = document.getElementById('clock');
