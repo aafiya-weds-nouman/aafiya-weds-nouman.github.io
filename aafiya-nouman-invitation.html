@@ -1,0 +1,808 @@
+<title>Aafiya &amp; Nouman</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap">
+
+<style>
+/* Single-theme by design: parchment day screens and night-sky screens paint their own grounds. */
+:root{
+  --parch:#F4EEDF;
+  --parch-2:#EBE1CB;
+  --ink:#2E3530;
+  --ink-soft:#5C645D;
+  --green:#254234;
+  --green-deep:#17302A;
+  --gold:#C8A862;
+  --gold-deep:#A7893F;
+  --flame:#FFC46B;
+  --script:'Great Vibes','Brush Script MT',cursive;
+  --serif:'Cormorant Garamond','Iowan Old Style',Georgia,serif;
+  --arabic:'Amiri','Scheherazade New','Traditional Arabic',serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%;box-sizing:border-box}
+body{
+  height:100%;
+  margin:0;
+  overflow:hidden;
+  background:var(--green-deep);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---- deck ---- */
+.deck{
+  height:100%;
+  display:flex;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  overscroll-behavior-x:contain;
+}
+.deck::-webkit-scrollbar{display:none}
+.screen{
+  position:relative;
+  flex:0 0 100%;
+  width:100%;
+  height:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  overflow:hidden;
+}
+.bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.scroll{
+  position:relative;
+  z-index:1;
+  height:100%;
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:28px 18px 74px;
+  scrollbar-width:none;
+}
+.scroll::-webkit-scrollbar{display:none}
+
+/* ---- arch frame ---- */
+.frame{position:relative;width:100%;max-width:400px;margin:auto;container-type:inline-size}
+.frame>.arch{position:absolute;top:0;left:0;width:100%;height:34cqw;display:block;color:var(--gold);overflow:visible}
+.frame::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:34cqw;bottom:0;
+  border:1px solid var(--gold);
+  border-top:none;
+  pointer-events:none;
+}
+.inner{
+  position:relative;
+  padding:15cqw 22px 30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  text-align:center;
+}
+
+/* ---- grounds ---- */
+.cream{background:radial-gradient(120% 70% at 50% 0%,#FAF5EA 0%,var(--parch) 55%,var(--parch-2) 100%);color:var(--ink)}
+.cream .bg::after{
+  content:"";
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.07;
+  mix-blend-mode:multiply;
+}
+.night{background:linear-gradient(180deg,#07121B 0%,#0E2130 38%,#293643 66%,#6A4A33 100%);color:#F1E8D4}
+.night .bg::before{
+  content:"";
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%23fff'%3E%3Ccircle cx='12' cy='30' r='.8'/%3E%3Ccircle cx='50' cy='12' r='1'/%3E%3Ccircle cx='90' cy='40' r='.7'/%3E%3Ccircle cx='130' cy='20' r='1.1'/%3E%3Ccircle cx='160' cy='60' r='.8'/%3E%3Ccircle cx='30' cy='80' r='1'/%3E%3Ccircle cx='70' cy='100' r='.6'/%3E%3Ccircle cx='110' cy='90' r='.9'/%3E%3Ccircle cx='150' cy='120' r='.7'/%3E%3Ccircle cx='20' cy='140' r='.9'/%3E%3Ccircle cx='60' cy='160' r='1'/%3E%3Ccircle cx='100' cy='150' r='.7'/%3E%3Ccircle cx='140' cy='170' r='.8'/%3E%3Ccircle cx='170' cy='10' r='.6'/%3E%3Ccircle cx='85' cy='65' r='.5'/%3E%3C/g%3E%3C/svg%3E");
+  opacity:.75;
+  height:70%;
+  -webkit-mask-image:linear-gradient(180deg,#000 40%,transparent);
+  mask-image:linear-gradient(180deg,#000 40%,transparent);
+}
+.night .bg::after{
+  content:"";
+  position:absolute;
+  left:-20%;right:-20%;bottom:-8%;height:48%;
+  background:radial-gradient(60% 65% at 50% 100%,rgba(255,168,74,.5),rgba(255,140,60,.15) 45%,transparent 72%);
+}
+.dusk{background:linear-gradient(180deg,#F4DCC9 0%,#EEC3B0 35%,#DEA394 65%,#95706A 100%);color:#3A2E2C}
+.dusk .bg::after{
+  content:"";
+  position:absolute;
+  left:-20%;right:-20%;bottom:-8%;height:40%;
+  background:radial-gradient(60% 65% at 50% 100%,rgba(255,220,180,.55),transparent 70%);
+}
+
+/* ---- scenery ---- */
+.mosque{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:132%;max-width:none;height:auto;color:#040A10;opacity:.9;z-index:1}
+.dusk .mosque{color:#5A4441;opacity:.9}
+.cream .mosque.wm{color:var(--green);opacity:.07;width:110%;bottom:6%}
+.crescent{position:absolute;top:9%;left:50%;transform:translateX(-50%);width:54px;height:54px;color:#F6EBD0;filter:drop-shadow(0 0 16px rgba(255,230,170,.7))}
+.lantern{position:absolute;width:34px;height:85px;color:var(--gold);filter:drop-shadow(0 0 10px rgba(255,190,90,.55));z-index:2}
+.lantern.a{left:8%;top:-16px;width:30px;height:75px}
+.lantern.b{right:8%;top:-2px;width:38px;height:95px}
+.night .lantern{color:#E6C57A}
+.sprig{position:absolute;width:132px;height:132px;z-index:2}
+.sprig.bl{left:-18px;bottom:-18px}
+.sprig.br{right:-18px;bottom:-18px;transform:scaleX(-1)}
+.sprig.tl{left:-18px;top:-18px;transform:scaleY(-1)}
+.sprig.tr{right:-18px;top:-18px;transform:scale(-1,-1)}
+.night .sprig,.dusk .sprig{opacity:.92}
+
+/* ---- type ---- */
+h1,h2,h3,p{margin:0}
+.title{font-family:var(--script);font-weight:400;font-size:clamp(2.2rem,10vw,2.8rem);line-height:1.1;color:var(--green)}
+.names{font-family:var(--script);font-weight:400;font-size:clamp(3rem,14vw,4.1rem);line-height:1;color:var(--green)}
+.names .amp{display:block;font-size:.48em;line-height:1.15;color:var(--gold-deep)}
+.names.initials{font-family:var(--arabic);font-weight:400;font-size:clamp(4.4rem,23vw,6.4rem);letter-spacing:0;line-height:1.3}
+.names.initials .amp{display:inline;font-family:var(--serif);font-style:italic;font-size:.5em;margin:0 .1em;vertical-align:.12em}
+.night .title,.night .names,.dusk .names{color:#F6EBD0}
+.dusk .names{color:#3A2E2C}
+.night .names .amp{color:var(--gold)}
+.caps{font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;line-height:1.7}
+.lead{font-size:1.05rem;text-wrap:pretty}
+.it{font-style:italic}
+.small{font-size:.92rem}
+.muted{opacity:.78}
+.big{font-size:1.28rem;font-weight:500;line-height:1.35}
+.label{font-size:.98rem;color:var(--ink-soft)}
+.ar{font-family:var(--arabic);direction:rtl;font-size:clamp(1.7rem,8vw,2.2rem);line-height:1.6;color:var(--ink)}
+.night .ar{color:var(--gold)}
+.dusk .ar{color:#3A2E2C}
+.orn{width:120px;height:18px;color:var(--gold-deep);display:block;flex:none}
+.night .orn,.dusk .orn{color:var(--gold)}
+.icon-lg{width:44px;height:44px;color:var(--green)}
+.heart{width:16px;height:16px;color:var(--gold-deep)}
+.night .heart{color:var(--gold)}
+.dusk .heart{color:#B0625E}
+
+/* ---- buttons ---- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:10px;
+  background:var(--green);
+  color:#F4EAD2;
+  border:1px solid var(--gold);
+  border-radius:999px;
+  padding:9px 26px;
+  font-family:var(--serif);
+  font-size:1rem;
+  letter-spacing:.02em;
+  cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+  transition:background .2s ease;
+}
+.btn:hover,.btn:focus-visible{background:#2F5443}
+.btn svg{width:16px;height:16px;flex:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---- event cards ---- */
+.evlist{width:100%;display:flex;flex-direction:column;gap:10px}
+.ev{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 14px 10px 10px;
+  border:1px solid var(--gold);border-radius:8px;
+  text-align:left;background:var(--tint);
+}
+.ev .ico{
+  flex:none;width:58px;height:58px;border-radius:50%;
+  background:rgba(255,255,255,.62);
+  border:1px solid var(--gold);
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.7);
+  color:var(--ico);
+  display:grid;place-items:center;
+}
+.ev .ico svg{width:36px;height:36px}
+.ev h3{font-size:1.15rem;font-weight:600;color:var(--green)}
+.ev p{font-size:.9rem;color:var(--ink-soft);line-height:1.4}
+
+/* ---- countdown ---- */
+.cd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%}
+.cd div{
+  border:1px solid var(--gold);border-radius:6px;
+  padding:10px 2px 8px;
+  background:rgba(6,14,20,.5);
+  box-shadow:inset 0 0 0 3px rgba(6,14,20,.6),inset 0 0 0 4px rgba(200,168,98,.55);
+}
+.cd b{display:block;font-size:clamp(1.5rem,7vw,2rem);font-weight:500;color:#F6EBD0;font-variant-numeric:tabular-nums;line-height:1.1}
+.cd small{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:2px}
+
+/* ---- venue ---- */
+.photo{
+  width:100%;aspect-ratio:16/10;max-width:100%;
+  border:1px solid var(--gold);border-radius:4px;
+  background:linear-gradient(180deg,#F1E7D0,#D9C69E);
+  display:grid;place-items:center;position:relative;overflow:hidden;color:var(--green);
+}
+.photo svg{width:78%;height:auto;opacity:.32}
+.photo span{position:absolute;bottom:8px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.addr{display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:.95rem;line-height:1.45}
+.addr svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--green)}
+.map{width:100%;aspect-ratio:16/9;max-width:100%;border:1px solid var(--gold);border-radius:4px;background:#EFEBDF;position:relative;overflow:hidden}
+.map svg{width:100%;height:100%;display:block}
+
+/* ---- dress code ---- */
+.dress{width:100%;display:flex;flex-direction:column;gap:10px}
+.dr{display:flex;align-items:center;gap:14px;padding:10px 14px 10px 10px;border:1px solid var(--gold);border-radius:8px;background:#F7F0E1;text-align:left}
+.dr .sw{flex:none;width:64px;height:48px;border-radius:6px;border:1px solid rgba(0,0,0,.14);box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.dr h3{font-size:1.1rem;font-weight:600;color:var(--green)}
+.dr p{font-size:.9rem;color:var(--ink-soft)}
+
+/* ---- rsvp ---- */
+.wa{width:66px;height:66px;color:#2E8B57}
+.numbox{
+  width:100%;position:relative;
+  border:1px solid var(--gold);padding:16px 14px;
+  font-size:1.3rem;font-weight:500;letter-spacing:.05em;line-height:1.75;
+  font-variant-numeric:tabular-nums;
+}
+.numbox::before{content:"";position:absolute;inset:4px;border:1px solid rgba(200,168,98,.6);pointer-events:none}
+
+/* ---- navigation ---- */
+.dots{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:6px;z-index:5;pointer-events:none}
+.dots button{pointer-events:auto;width:6px;height:6px;border-radius:3px;border:0;padding:0;background:rgba(200,168,98,.45);cursor:pointer;transition:width .25s ease,background .25s ease}
+.dots button.on{width:20px;background:var(--gold)}
+.arrow{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:5;
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(20,36,28,.72);color:var(--gold);
+  display:none;place-items:center;cursor:pointer;padding:0;
+}
+.arrow svg{width:18px;height:18px}
+.arrow.prev{left:14px}.arrow.next{right:14px}
+@media (min-width:640px) and (hover:hover){.arrow{display:grid}}
+
+@media (prefers-reduced-motion:reduce){
+  .deck{scroll-behavior:auto}
+  *{transition:none !important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="arch-path" d="M0 34 V25 C0 12 12 7 26 6 C40 5 46 4 50 0 C54 4 60 5 74 6 C88 7 100 12 100 25 V34" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+
+    <symbol id="orn" viewBox="0 0 140 20" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M0 10 H48"/><path d="M92 10 H140"/>
+      <path d="M50 10 Q59 2 69 10 Q59 18 50 10Z" fill="currentColor" stroke="none"/>
+      <path d="M71 10 Q81 2 90 10 Q81 18 71 10Z" fill="currentColor" stroke="none"/>
+      <circle cx="70" cy="10" r="2.3" fill="currentColor" stroke="none"/>
+    </symbol>
+
+    <symbol id="mosque" viewBox="0 0 400 120">
+      <g fill="currentColor">
+        <rect x="0" y="96" width="400" height="24"/>
+        <rect x="28" y="30" width="8" height="70"/><circle cx="32" cy="28" r="6"/><rect x="31" y="14" width="2" height="10"/><circle cx="32" cy="13" r="1.8"/>
+        <rect x="364" y="30" width="8" height="70"/><circle cx="368" cy="28" r="6"/><rect x="367" y="14" width="2" height="10"/><circle cx="368" cy="13" r="1.8"/>
+        <rect x="88" y="50" width="6" height="50"/><circle cx="91" cy="48" r="5"/>
+        <rect x="306" y="50" width="6" height="50"/><circle cx="309" cy="48" r="5"/>
+        <path d="M110 100 V82 C110 62 125 54 140 50 C155 54 170 62 170 82 V100 Z"/>
+        <path d="M230 100 V82 C230 62 245 54 260 50 C275 54 290 62 290 82 V100 Z"/>
+        <path d="M150 100 V72 C150 42 175 30 200 20 C225 30 250 42 250 72 V100 Z"/>
+        <rect x="199" y="6" width="2" height="16"/><circle cx="200" cy="5" r="2.6"/>
+        <rect x="100" y="80" width="200" height="20"/>
+      </g>
+    </symbol>
+
+    <symbol id="lantern" viewBox="0 0 40 100">
+      <path d="M20 0v26" stroke="currentColor" stroke-width="1" fill="none"/>
+      <path d="M14 26h12l2 5H12z" fill="currentColor"/>
+      <path d="M13 40h14v28H13z" fill="var(--flame)" opacity=".85"/>
+      <path d="M12 31h16l4 10v26l-4 8H12l-4-8V41z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M20 40v28M13 54h14" stroke="currentColor" stroke-width=".8" fill="none" opacity=".7"/>
+      <path d="M20 75v8" stroke="currentColor" stroke-width="1" fill="none"/>
+      <circle cx="20" cy="86" r="3" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="rose" viewBox="-10 -10 20 20">
+      <g fill="#E7B4BF">
+        <ellipse cx="0" cy="-4.8" rx="3.3" ry="5"/>
+        <ellipse cx="0" cy="-4.8" rx="3.3" ry="5" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-4.8" rx="3.3" ry="5" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-4.8" rx="3.3" ry="5" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-4.8" rx="3.3" ry="5" transform="rotate(288)"/>
+      </g>
+      <circle r="2.6" fill="#D28D9D"/>
+      <circle r="1.1" fill="#F6DCE2"/>
+    </symbol>
+
+    <symbol id="sprig" viewBox="0 0 100 100">
+      <path d="M4 96 C20 70 40 50 82 14" fill="none" stroke="#7E9C78" stroke-width="1.4"/>
+      <path d="M30 63 C40 67 46 61 48 53" fill="none" stroke="#7E9C78" stroke-width="1.1"/>
+      <path d="M58 40 C66 44 72 40 74 32" fill="none" stroke="#7E9C78" stroke-width="1.1"/>
+      <g fill="#9DB79A">
+        <ellipse cx="16" cy="78" rx="4" ry="9" transform="rotate(-52 16 78)"/>
+        <ellipse cx="28" cy="66" rx="4" ry="9" transform="rotate(32 28 66)"/>
+        <ellipse cx="42" cy="48" rx="4" ry="9" transform="rotate(-56 42 48)"/>
+        <ellipse cx="56" cy="40" rx="4" ry="9" transform="rotate(36 56 40)"/>
+        <ellipse cx="68" cy="26" rx="3.5" ry="8" transform="rotate(-52 68 26)"/>
+        <ellipse cx="76" cy="20" rx="3" ry="7" transform="rotate(30 76 20)"/>
+      </g>
+      <use href="#rose" x="36" y="50" width="24" height="24"/>
+      <use href="#rose" x="70" y="-2" width="20" height="20"/>
+      <use href="#rose" x="6" y="80" width="15" height="15"/>
+    </symbol>
+
+    <symbol id="i-masjid" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 41h38"/>
+      <path d="M13 41V28h22v13"/>
+      <path d="M14.5 28c0-9 5.5-13.5 9.5-16 4 2.5 9.5 7 9.5 16"/>
+      <path d="M24 12V8"/>
+      <path d="M25.6 4.6a2.4 2.4 0 1 0 0 4.8 2.6 2.6 0 0 1 0-4.8z" fill="currentColor" stroke="none"/>
+      <path d="M20 41v-7c0-3.6 8-3.6 8 0v7"/>
+      <path d="M8 41V19M11 41V19M7 19c0-3 5-3 5 0M9.5 16v-3"/>
+      <path d="M37 41V19M40 41V19M36 19c0-3 5-3 5 0M38.5 16v-3"/>
+    </symbol>
+
+    <symbol id="i-paisley" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 41C13 41 9 35 9 29 9 22 14 17 21 15 26 13.5 30 11 33 8 35 6 38 8 37 11 36 15 32 18 31 22 30 27 30 33 27 37 25.5 39.5 23 41 20 41Z"/>
+      <path d="M20 36C16 36 13.5 33 13.5 29 13.5 24.5 17.5 21 22 20 25 19.3 28 17 30 15"/>
+      <circle cx="20" cy="28" r="4.2"/>
+      <g fill="currentColor" stroke="none">
+        <circle cx="20" cy="28" r="1.6"/>
+        <circle cx="8" cy="13" r="1"/><circle cx="41" cy="19" r="1"/><circle cx="40" cy="33" r="1"/><circle cx="30" cy="44" r="1"/><circle cx="12" cy="43" r="1"/>
+      </g>
+    </symbol>
+
+    <symbol id="i-marigold" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <g fill="currentColor" fill-opacity=".12">
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(45 24 24)"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(90 24 24)"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(135 24 24)"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(180 24 24)"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(225 24 24)"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(270 24 24)"/>
+        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(315 24 24)"/>
+      </g>
+      <g fill="currentColor" fill-opacity=".22">
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(22.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(67.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(112.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(157.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(202.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(247.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(292.5 24 24)"/>
+        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(337.5 24 24)"/>
+      </g>
+      <circle cx="24" cy="24" r="4"/>
+      <circle cx="24" cy="24" r="1.4" fill="currentColor" stroke="none"/>
+    </symbol>
+
+    <symbol id="i-cloche" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 35h38"/>
+      <path d="M10 39h28"/>
+      <path d="M9 35c0-11 7-18 15-18s15 7 15 18"/>
+      <path d="M24 17v-3"/>
+      <circle cx="24" cy="12" r="2"/>
+      <path d="M13.5 31c.5-5 3.5-9 8-10.5"/>
+    </symbol>
+
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.5 8.5 0 1 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9.2 8.6c.2 2.4 3.3 5.6 5.8 6.1l1.4-1.4 1.9.9-.4 1.9c-3.9.5-9.3-4.8-8.8-8.7l1.8-.5.9 1.7z" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.3 6c-2.3 4.4-9.3 9-9.3 9z" fill="currentColor"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · Cover -->
+  <section class="screen night">
+    <div class="bg">
+      <svg class="crescent" viewBox="0 0 40 40" aria-hidden="true"><path d="M23 3A17 17 0 1 0 23 37A18 18 0 0 1 23 3z" fill="currentColor"/></svg>
+      <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
+      <svg class="sprig tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="it lead">Our Wedding Invitation</p>
+          <p class="caps">A special invitation to<br>our beloved family &amp; friends</p>
+          <h1 class="names initials" dir="rtl" lang="ar">ع <span class="amp">&amp;</span> ن</h1>
+          <div>
+            <p class="it small muted">In the loving memory of</p>
+            <p class="lead" style="font-weight:500">Late Haji Husain Miya Bamne<br>&amp; Late Haji Murad Bamne</p>
+          </div>
+          <button class="btn" type="button" data-next>Tap to Open</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Bismillah -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="lantern b" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="mosque wm" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+          <p class="lead">In the name of Allah,<br>the Most Gracious, the Most Merciful</p>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <p class="it lead">“And We created you in pairs...”</p>
+          <p class="small muted">(Qur’an 78:8)</p>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Invitation -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="lantern b" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="lead">Together with our families<br>we cordially invite you to the<br><span class="it">Nikah Ceremony of</span></p>
+          <h2 class="names">Aafiya<span class="amp">&amp;</span>Nouman</h2>
+          <p class="big">Saturday, 7th November 2026<br>5:00 PM</p>
+          <svg class="icon-lg" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-masjid"/></svg>
+          <p class="big">Nawab Ayaz Masjid<br><span class="label" style="font-weight:400">Dockyard Road, Mumbai</span></p>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <p class="it small">Your presence will make our day<br>more special</p>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Families -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="lantern b" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="lead">With the blessings of</p>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <div>
+            <p class="label">Bride’s Father</p>
+            <p class="big">Mehmood Husain Miya Bamne</p>
+          </div>
+          <div>
+            <p class="label">Groom’s Father</p>
+            <p class="big">Niyaz Tajuddin Fakih</p>
+          </div>
+          <div>
+            <p class="label">Family / Grandparents</p>
+            <p class="big">Gulzar Husain Miya Bamne<br>Fehmida Murad Bamne</p>
+          </div>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <p class="it small">May Allah accept<br>our union and bless us<br>with a beautiful future.</p>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Wedding Events -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <h2 class="title">Wedding Events</h2>
+          <div class="evlist">
+            <div class="ev" style="--tint:#DCE8D2;--ico:#2F6B3C">
+              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-paisley"/></svg></div>
+              <div><h3>Mehandi</h3><p>5th November 2026</p></div>
+            </div>
+            <div class="ev" style="--tint:#F7D3DC;--ico:#C24E73">
+              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-marigold"/></svg></div>
+              <div><h3>Haldi</h3><p>3rd November 2026</p></div>
+            </div>
+            <div class="ev" style="--tint:#F1E7D0;--ico:#254234">
+              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-masjid"/></svg></div>
+              <div><h3>Nikah</h3><p>7th November 2026<br>5:00 PM<br>Nawab Ayaz Masjid,<br>Dockyard Road, Mumbai</p></div>
+            </div>
+            <div class="ev" style="--tint:#F3E4C2;--ico:#A47E2B">
+              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cloche"/></svg></div>
+              <div><h3>Reception / Walima</h3><p>7th November 2026</p></div>
+            </div>
+          </div>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Countdown -->
+  <section class="screen night">
+    <div class="bg">
+      <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
+      <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="lantern b" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="lead">Countdown to</p>
+          <h2 class="title">Nikah</h2>
+          <div class="cd" id="clock" data-target="2026-11-07T17:00:00+05:30">
+            <div><b id="cd-d">—</b><small>Days</small></div>
+            <div><b id="cd-h">—</b><small>Hours</small></div>
+            <div><b id="cd-m">—</b><small>Minutes</small></div>
+            <div><b id="cd-s">—</b><small>Seconds</small></div>
+          </div>
+          <p class="big">7th November 2026<br><span style="font-weight:400;font-size:.9em">Saturday &nbsp;·&nbsp; 5:00 PM</span></p>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <p class="it lead">“Two hearts, one Deen,<br>a lifetime together.”</p>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Venue -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <h2 class="title">Venue</h2>
+          <div class="photo">
+            <svg viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
+            <span>Venue photo</span>
+          </div>
+          <div>
+            <p class="big">Najam Baug Hall</p>
+            <p class="label">weddings, birthdays and parties.</p>
+          </div>
+          <div class="addr">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>
+            <p>Samantbhai Nanji Marg,<br>Noor Baug, Dongri, Umerkhadi,<br>Mumbai, Maharashtra 400009</p>
+          </div>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Najam+Baug+Hall+Samantbhai+Nanji+Marg+Dongri+Mumbai" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>
+            Open in Google Maps
+          </a>
+          <div class="map" aria-hidden="true">
+            <svg viewBox="0 0 320 180">
+              <rect width="320" height="180" fill="#EFEBDF"/>
+              <path d="M0 60 C80 50 120 90 200 70 S300 40 320 55" fill="none" stroke="#D9D2C0" stroke-width="10"/>
+              <path d="M0 60 C80 50 120 90 200 70 S300 40 320 55" fill="none" stroke="#FFF" stroke-width="6"/>
+              <path d="M40 0 L70 180M150 0 L130 180M250 0 L270 180" stroke="#E2DCCB" stroke-width="7"/>
+              <path d="M40 0 L70 180M150 0 L130 180M250 0 L270 180" stroke="#FFF" stroke-width="4"/>
+              <path d="M0 130 C60 140 120 120 320 135" fill="none" stroke="#BFD3DE" stroke-width="14"/>
+              <g transform="translate(160 78)">
+                <path d="M0 14s-9-8-9-14a9 9 0 1 1 18 0c0 6-9 14-9 14z" fill="#C7433E"/>
+                <circle r="3" fill="#FFF"/>
+              </g>
+              <rect x="176" y="66" width="98" height="20" rx="3" fill="#FFF" opacity=".9"/>
+              <text x="225" y="80" font-family="Cormorant Garamond, Georgia, serif" font-size="12" text-anchor="middle" fill="#2E3530">Najam Baug Hall</text>
+            </svg>
+          </div>
+          <p class="small muted">Click the button above for exact location</p>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Dress Code -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <h2 class="title">Dress Code</h2>
+          <p class="lead">Kindly wear the following colours<br>to make our day even more special</p>
+          <div class="dress">
+            <div class="dr"><span class="sw" style="background:linear-gradient(135deg,#5A9457,#2F6039)"></span><div><h3>Mehandi</h3><p>Green</p></div></div>
+            <div class="dr"><span class="sw" style="background:linear-gradient(135deg,#F3AEC2,#D66A8E)"></span><div><h3>Haldi</h3><p>Pink</p></div></div>
+            <div class="dr"><span class="sw" style="background:linear-gradient(135deg,#FFFFFF,#EFE9DE);border-color:#C8A862"></span><div><h3>Nikah</h3><p>White</p></div></div>
+            <div class="dr"><span class="sw" style="background:repeating-linear-gradient(90deg,#DDBC72 0 9px,#C29A4F 9px 13px,#EAD196 13px 22px)"></span><div><h3>Reception / Walima</h3><p>Golden &amp; Light Colours</p></div></div>
+          </div>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <p class="it small">Your presence is the greatest gift,<br>but if you wish to dress up,<br>here are our colour suggestions!</p>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · RSVP -->
+  <section class="screen cream">
+    <div class="bg">
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <h2 class="title">RSVP</h2>
+          <p class="lead">Please confirm your attendance<br>by contacting us on WhatsApp</p>
+          <svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+          <div class="numbox">
+            9970940525<br>9969323397<br>9987427622
+          </div>
+          <a class="btn" href="https://wa.me/919970940525?text=Assalamu%20Alaikum%2C%20I%20am%20confirming%20my%20attendance%20for%20Aafiya%20%26%20Nouman%27s%20Nikah." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+            Chat on WhatsApp
+          </a>
+          <button class="btn" type="button" data-next style="background:transparent;color:var(--green);box-shadow:none">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · Blessing -->
+  <section class="screen dusk">
+    <div class="bg">
+      <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
+      <svg class="sprig tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="ar">ٱلْحَمْدُ لِلَّٰهِ</p>
+          <p class="lead">May Allah bring barakah<br>in our union and make our journey<br>together filled with love, happiness<br>and endless blessings.</p>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <p class="it lead">With love,</p>
+          <h2 class="names" style="font-size:clamp(2.2rem,10vw,2.9rem)">Aafiya &amp; Nouman</h2>
+          <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
+          <button class="btn" type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · JazakAllah -->
+  <section class="screen night">
+    <div class="bg">
+      <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="lantern b" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
+      <svg class="sprig tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
+    </div>
+    <div class="scroll">
+      <div class="frame">
+        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
+        <div class="inner">
+          <p class="ar">ٱلْحَمْدُ لِلَّٰهِ</p>
+          <h2 class="names" style="font-size:clamp(2.4rem,11vw,3.2rem)">JazakAllah</h2>
+          <p class="lead">for being a part of<br>our special day</p>
+          <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
+          <button class="btn" type="button" id="music-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg>
+            <span id="music-label">Tap to play music</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<button class="arrow prev" type="button" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24" style="transform:scaleX(-1)"><use href="#i-chev"/></svg></button>
+<button class="arrow next" type="button" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+<div class="dots" id="dots" role="tablist" aria-label="Pages"></div>
+
+<audio id="music" src="music.mp3" loop preload="none"></audio>
+
+<script>
+(function(){
+  var deck = document.getElementById('deck');
+  var screens = Array.prototype.slice.call(deck.querySelectorAll('.screen'));
+  var dots = document.getElementById('dots');
+
+  screens.forEach(function(_, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Page ' + (i + 1));
+    b.addEventListener('click', function(){ go(i); });
+    dots.appendChild(b);
+  });
+  var dotEls = Array.prototype.slice.call(dots.children);
+
+  function current(){ return Math.round(deck.scrollLeft / deck.clientWidth); }
+  function go(i){
+    i = Math.max(0, Math.min(screens.length - 1, i));
+    deck.scrollTo({ left: i * deck.clientWidth, behavior: 'smooth' });
+  }
+  function paint(){
+    var c = current();
+    dotEls.forEach(function(d, i){ d.classList.toggle('on', i === c); });
+  }
+
+  deck.querySelectorAll('[data-next]').forEach(function(b){
+    b.addEventListener('click', function(){ go(current() + 1); });
+  });
+  document.getElementById('prev').addEventListener('click', function(){ go(current() - 1); });
+  document.getElementById('next').addEventListener('click', function(){ go(current() + 1); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') go(current() + 1);
+    if (e.key === 'ArrowLeft') go(current() - 1);
+  });
+  deck.addEventListener('scroll', paint, { passive: true });
+  window.addEventListener('resize', function(){ go(current()); });
+  paint();
+
+  /* countdown */
+  var clock = document.getElementById('clock');
+  var target = new Date(clock.dataset.target).getTime();
+  var out = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'),
+              m: document.getElementById('cd-m'), s: document.getElementById('cd-s') };
+  var pad = function(n){ return n < 10 ? '0' + n : String(n); };
+  function tick(){
+    var gap = target - Date.now();
+    if (gap <= 0){ out.d.textContent = out.h.textContent = out.m.textContent = out.s.textContent = '00'; return; }
+    var s = Math.floor(gap / 1000);
+    out.d.textContent = Math.floor(s / 86400);
+    out.h.textContent = pad(Math.floor(s / 3600) % 24);
+    out.m.textContent = pad(Math.floor(s / 60) % 60);
+    out.s.textContent = pad(s % 60);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* music */
+  var audio = document.getElementById('music');
+  var btn = document.getElementById('music-btn');
+  var label = document.getElementById('music-label');
+  audio.addEventListener('error', function(){ label.textContent = 'Music file not added yet'; });
+  btn.addEventListener('click', function(){
+    if (audio.paused){
+      audio.play().then(function(){ label.textContent = 'Tap to pause music'; })
+                  .catch(function(){ label.textContent = 'Music file not added yet'; });
+    } else {
+      audio.pause();
+      label.textContent = 'Tap to play music';
+    }
+  });
+})();
+</script>
