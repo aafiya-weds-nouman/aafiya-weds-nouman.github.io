@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Aafiya &amp; Nouman</title>
+<title>Aairaf &amp; Maryam</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,6 +56,8 @@ body{
   padding:56px 18px;
 }
 
+@media (min-width:600px){.scene .scroll{padding-bottom:190px}}
+
 /* ---- arch frame ---- */
 .frame{position:relative;width:100%;max-width:400px;margin:auto;container-type:inline-size}
 .frame>.arch{position:absolute;top:0;left:0;width:100%;height:34cqw;display:block;color:var(--gold);overflow:visible}
@@ -111,7 +113,7 @@ body{
 }
 
 /* ---- scenery ---- */
-.mosque{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:132%;max-width:none;height:auto;color:#040A10;opacity:.9;z-index:1}
+.mosque{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:min(132%,700px);max-width:none;height:auto;overflow:visible;color:#040A10;opacity:.9;z-index:1}
 .dusk .mosque{color:#5A4441;opacity:.9}
 .cream .mosque.wm{color:var(--green);opacity:.07;width:110%;bottom:6%}
 .crescent{position:absolute;top:9%;left:50%;transform:translateX(-50%);width:54px;height:54px;color:#F6EBD0;filter:drop-shadow(0 0 16px rgba(255,230,170,.7))}
@@ -173,7 +175,7 @@ h1,h2,h3,p{margin:0}
   transition:background .2s ease;
 }
 .btn:hover,.btn:focus-visible{background:#2F5443}
-.btn svg{width:16px;height:16px;flex:none}
+.btn svg{width:18px;height:18px;flex:none;--wa-phone:var(--green)}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 /* ---- event cards ---- */
@@ -195,6 +197,17 @@ h1,h2,h3,p{margin:0}
 .ev .ico svg{width:36px;height:36px}
 .ev h3{font-size:1.15rem;font-weight:600;color:var(--green)}
 .ev p{font-size:.9rem;color:var(--ink-soft);line-height:1.4}
+.ev .when{color:var(--ink);font-weight:500;margin-top:2px}
+.ev .venue{margin-top:6px}
+.ev .venue b{font-weight:600;color:var(--ink)}
+.map-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  min-height:34px;padding:6px 14px;border-radius:999px;
+  border:1px solid var(--gold);background:rgba(255,255,255,.6);
+  color:var(--green);font-size:.86rem;font-weight:600;text-decoration:none;
+}
+.map-btn svg{width:15px;height:15px;flex:none}
+.map-btn:hover,.map-btn:focus-visible{background:#fff}
 
 /* ---- countdown ---- */
 .cd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%}
@@ -206,27 +219,6 @@ h1,h2,h3,p{margin:0}
 }
 .cd b{display:block;font-size:clamp(1.5rem,7vw,2rem);font-weight:500;color:#F6EBD0;font-variant-numeric:tabular-nums;line-height:1.1}
 .cd small{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:2px}
-
-/* ---- venue ---- */
-.photo{
-  width:100%;aspect-ratio:16/10;max-width:100%;
-  border:1px solid var(--gold);border-radius:4px;
-  background:linear-gradient(180deg,#F1E7D0,#D9C69E);
-  display:grid;place-items:center;position:relative;overflow:hidden;color:var(--green);
-}
-.photo svg{width:78%;height:auto;opacity:.32}
-.photo span{position:absolute;bottom:8px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
-.addr{display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:.95rem;line-height:1.45}
-.addr svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--green)}
-.map{width:100%;aspect-ratio:16/9;max-width:100%;border:1px solid var(--gold);border-radius:4px;background:#EFEBDF;position:relative;overflow:hidden}
-.map svg{width:100%;height:100%;display:block}
-
-/* ---- dress code ---- */
-.dress{width:100%;display:flex;flex-direction:column;gap:10px}
-.dr{display:flex;align-items:center;gap:14px;padding:10px 14px 10px 10px;border:1px solid var(--gold);border-radius:8px;background:#F7F0E1;text-align:left}
-.dr .sw{flex:none;width:64px;height:48px;border-radius:6px;border:1px solid rgba(0,0,0,.14);box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
-.dr h3{font-size:1.1rem;font-weight:600;color:var(--green)}
-.dr p{font-size:.9rem;color:var(--ink-soft)}
 
 /* ---- rsvp ---- */
 .wa{width:66px;height:66px;color:#2E8B57}
@@ -294,7 +286,7 @@ html.sealed,html.sealed body{overflow:hidden}
 .seal-half.r{clip-path:polygon(52% 0,100% 0,100% 100%,51% 100%,46% 77%,54% 54%,47% 30%)}
 .seal-mono{
   position:absolute;left:0;right:0;top:50%;transform:translateY(-62%);
-  text-align:center;font-family:var(--arabic);font-size:31px;line-height:1;
+  text-align:center;font-family:var(--arabic);font-size:32px;line-height:1;
   color:#6A4712;text-shadow:0 1px 0 rgba(255,238,190,.7),0 -1px 1px rgba(80,52,8,.35);
 }
 .seal-mono i{font-family:var(--serif);font-size:.62em;margin:0 .15em;vertical-align:.25em}
@@ -329,6 +321,77 @@ html.sealed,html.sealed body{overflow:hidden}
 .cue svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 @keyframes cue{0%,100%{transform:translate(-50%,0);opacity:.75}50%{transform:translate(-50%,6px);opacity:1}}
 
+/* ---- ambient motion ---- */
+/* night pages: twinkling stars, glowing moon, breathing horizon */
+.night .bg::before{animation:twinkle 5s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.4}to{opacity:.9}}
+.night .bg::after,.dusk .bg::after{animation:breatheGlow 7s ease-in-out infinite alternate}
+@keyframes breatheGlow{from{opacity:.6}to{opacity:1}}
+.crescent{animation:moonGlow 6s ease-in-out infinite alternate}
+@keyframes moonGlow{from{filter:drop-shadow(0 0 8px rgba(255,230,170,.4))}to{filter:drop-shadow(0 0 24px rgba(255,230,170,.95))}}
+/* lanterns swing, flower sprigs sway in a breeze */
+.lantern{transform-origin:50% 0;animation:swing 4.5s ease-in-out infinite alternate}
+.lantern.b{animation-duration:5.5s;animation-delay:-2s}
+@keyframes swing{from{rotate:-5deg}to{rotate:5deg}}
+.sprig use{transform-origin:4px 96px;animation:sway 7s ease-in-out infinite alternate}
+.sprig.br use,.sprig.tr use{animation-delay:-3.5s}
+@keyframes sway{from{rotate:-4deg}to{rotate:3deg}}
+/* parchment pages: specks of gold drifting upward in the light */
+.cream .bg::before{
+  content:"";position:absolute;inset:0;opacity:.8;
+  background-image:radial-gradient(circle,rgba(200,168,98,.6) 0 1.5px,transparent 2.2px),radial-gradient(circle,rgba(200,168,98,.45) 0 1px,transparent 1.7px);
+  background-size:180px 220px,130px 160px;
+  background-position:0 0,60px 40px;
+  animation:motes 30s linear infinite;
+}
+@keyframes motes{to{background-position:0 -220px,60px -120px}}
+/* names and titles: a slow gold light passes across them */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .shimmer{
+    background:linear-gradient(100deg,currentColor 0 42%,#F1D48C 50%,currentColor 58% 100%);
+    background-size:250% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:sheen 7s ease-in-out infinite;
+    /* script swashes reach outside the line box; widen the painted area without moving the text */
+    padding:.3em .4em;margin:-.3em -.4em;
+  }
+  .shimmer .amp{-webkit-text-fill-color:currentColor}
+}
+@keyframes sheen{0%{background-position:120% 0}55%,100%{background-position:-20% 0}}
+/* sparkles: star glints scattered over every page (added by the script) */
+.spark{
+  position:absolute;z-index:1;pointer-events:none;opacity:.6;
+  background:#E3C173;
+  clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);
+  animation:glint 4s ease-in-out infinite;
+}
+.night .spark{background:#FFF3D1}
+.dusk .spark{background:#FFF4E2}
+.envelope .spark{z-index:4;background:#F3DA96}
+@keyframes glint{0%,100%{opacity:0;transform:scale(.2) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+/* night pages: an occasional shooting star */
+.meteor{
+  position:absolute;top:10%;left:72%;z-index:1;pointer-events:none;
+  width:130px;height:1.5px;border-radius:2px;opacity:0;
+  background:linear-gradient(90deg,rgba(255,246,220,1),rgba(255,246,220,0));
+  box-shadow:0 0 6px rgba(255,240,200,.8);
+  transform:rotate(-28deg);
+  animation:meteor 10s linear infinite;
+}
+@keyframes meteor{0%,84%{opacity:0;translate:0 0}86%{opacity:1}95%,100%{opacity:0;translate:-280px 150px}}
+
+/* small details */
+.heart{animation:beat 1.8s ease-in-out infinite}
+.wa{animation:beat 2.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.12)}60%{transform:scale(1)}}
+.cd div{animation:boxGlow 3s ease-in-out infinite alternate}
+@keyframes boxGlow{to{box-shadow:inset 0 0 0 3px rgba(6,14,20,.6),inset 0 0 0 4px rgba(200,168,98,.55),0 0 16px rgba(200,168,98,.4)}}
+/* each page's text rises in, line by line, as it scrolls into view */
+.reveal .frame{opacity:0;transition:opacity 1s ease}
+.reveal .inner>*{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:calc(200ms + var(--i,0) * 110ms)}
+.reveal .in .frame,.reveal .in .inner>*{opacity:1;transform:none}
+
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important;animation:none !important}
 }
@@ -345,9 +408,9 @@ html.sealed,html.sealed body{overflow:hidden}
       <circle cx="70" cy="10" r="2.3" fill="currentColor" stroke="none"/>
     </symbol>
 
-    <symbol id="mosque" viewBox="0 0 400 120">
+    <symbol id="mosque" viewBox="0 0 400 120" overflow="visible">
       <g fill="currentColor">
-        <rect x="0" y="96" width="400" height="24"/>
+        <rect x="-2000" y="96" width="4400" height="24"/>
         <rect x="28" y="30" width="8" height="70"/><circle cx="32" cy="28" r="6"/><rect x="31" y="14" width="2" height="10"/><circle cx="32" cy="13" r="1.8"/>
         <rect x="364" y="30" width="8" height="70"/><circle cx="368" cy="28" r="6"/><rect x="367" y="14" width="2" height="10"/><circle cx="368" cy="13" r="1.8"/>
         <rect x="88" y="50" width="6" height="50"/><circle cx="91" cy="48" r="5"/>
@@ -410,39 +473,11 @@ html.sealed,html.sealed body{overflow:hidden}
       <path d="M37 41V19M40 41V19M36 19c0-3 5-3 5 0M38.5 16v-3"/>
     </symbol>
 
-    <symbol id="i-paisley" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 41C13 41 9 35 9 29 9 22 14 17 21 15 26 13.5 30 11 33 8 35 6 38 8 37 11 36 15 32 18 31 22 30 27 30 33 27 37 25.5 39.5 23 41 20 41Z"/>
-      <path d="M20 36C16 36 13.5 33 13.5 29 13.5 24.5 17.5 21 22 20 25 19.3 28 17 30 15"/>
-      <circle cx="20" cy="28" r="4.2"/>
-      <g fill="currentColor" stroke="none">
-        <circle cx="20" cy="28" r="1.6"/>
-        <circle cx="8" cy="13" r="1"/><circle cx="41" cy="19" r="1"/><circle cx="40" cy="33" r="1"/><circle cx="30" cy="44" r="1"/><circle cx="12" cy="43" r="1"/>
-      </g>
-    </symbol>
-
-    <symbol id="i-marigold" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <g fill="currentColor" fill-opacity=".12">
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(45 24 24)"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(90 24 24)"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(135 24 24)"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(180 24 24)"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(225 24 24)"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(270 24 24)"/>
-        <ellipse cx="24" cy="8.5" rx="3.6" ry="6.5" transform="rotate(315 24 24)"/>
-      </g>
-      <g fill="currentColor" fill-opacity=".22">
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(22.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(67.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(112.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(157.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(202.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(247.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(292.5 24 24)"/>
-        <ellipse cx="24" cy="14" rx="2.8" ry="4.6" transform="rotate(337.5 24 24)"/>
-      </g>
-      <circle cx="24" cy="24" r="4"/>
-      <circle cx="24" cy="24" r="1.4" fill="currentColor" stroke="none"/>
+    <symbol id="i-rings" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="29" r="11"/>
+      <circle cx="30" cy="29" r="11"/>
+      <path d="M14 12l2.5-3.5h3L22 12l-4 5.5z" fill="currentColor" fill-opacity=".18"/>
+      <path d="M14 12h8M16.5 8.5 18 12l1.5-3.5"/>
     </symbol>
 
     <symbol id="i-cloche" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -455,7 +490,10 @@ html.sealed,html.sealed body{overflow:hidden}
     </symbol>
 
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
-    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.5 8.5 0 1 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9.2 8.6c.2 2.4 3.3 5.6 5.8 6.1l1.4-1.4 1.9.9-.4 1.9c-3.9.5-9.3-4.8-8.8-8.7l1.8-.5.9 1.7z" fill="currentColor"/></symbol>    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.3 6c-2.3 4.4-9.3 9-9.3 9z" fill="currentColor"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24">
+      <path d="M12 2.2a9.8 9.8 0 0 0-8.45 14.76L2.2 21.8l4.97-1.3A9.8 9.8 0 1 0 12 2.2z" fill="currentColor"/>
+      <path transform="translate(6.4 6.4) scale(.47)" fill="var(--wa-phone,#fff)" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </symbol>    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.3 6c-2.3 4.4-9.3 9-9.3 9z" fill="currentColor"/></symbol>
 
     <radialGradient id="waxFill" cx="36%" cy="30%" r="80%">
       <stop offset="0" stop-color="#F7E08F"/>
@@ -522,8 +560,8 @@ html.sealed,html.sealed body{overflow:hidden}
     <svg class="env-edge" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,0 50,100 100,0" fill="none" stroke="#C8A862" stroke-opacity=".6" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
   </div>
   <div class="env-seal" aria-hidden="true">
-    <div class="seal-half l"><svg viewBox="0 0 140 140"><use href="#seal"/></svg><div class="seal-mono" dir="rtl" lang="ar">&#1593; <i>&amp;</i> &#1606;</div></div>
-    <div class="seal-half r"><svg viewBox="0 0 140 140"><use href="#seal"/></svg><div class="seal-mono" dir="rtl" lang="ar">&#1593; <i>&amp;</i> &#1606;</div></div>
+    <div class="seal-half l"><svg viewBox="0 0 140 140"><use href="#seal"/></svg><div class="seal-mono" dir="rtl" lang="ar">اع <i>&amp;</i> م</div></div>
+    <div class="seal-half r"><svg viewBox="0 0 140 140"><use href="#seal"/></svg><div class="seal-mono" dir="rtl" lang="ar">اع <i>&amp;</i> م</div></div>
   </div>
   <div class="env-hint" aria-hidden="true">
     <p class="en">Tap to open</p>
@@ -535,7 +573,7 @@ html.sealed,html.sealed body{overflow:hidden}
 <main>
 
   <!-- 1 . Cover -->
-  <section class="screen night">
+  <section class="screen night scene">
     <div class="bg">
       <svg class="crescent" viewBox="0 0 40 40" aria-hidden="true"><path d="M23 3A17 17 0 1 0 23 37A18 18 0 0 1 23 3z" fill="currentColor"/></svg>
       <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
@@ -548,10 +586,15 @@ html.sealed,html.sealed body{overflow:hidden}
         <div class="inner">
           <p class="it lead">Our Wedding Invitation</p>
           <p class="caps">A special invitation to<br>our beloved family &amp; friends</p>
-          <h1 class="names initials" dir="rtl" lang="ar">&#1593; <span class="amp">&amp;</span> &#1606;</h1>
+          <h1 class="names initials shimmer" dir="rtl" lang="ar" aria-label="Aairaf and Maryam">اع <span class="amp">&amp;</span> م</h1>
           <div>
             <p class="it small muted">In the loving memory of</p>
             <p class="lead" style="font-weight:500">Late Haji Husain Miya Bamne<br>&amp; Late Haji Murad Bamne</p>
+          </div>
+          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
+          <div>
+            <p class="lead" style="font-weight:500">Mrs Reshma<br>&amp; Mr Mahmood Husain Miya Bamne</p>
+            <p class="it small muted">invites you</p>
           </div>
         </div>
       </div>
@@ -571,7 +614,7 @@ html.sealed,html.sealed body{overflow:hidden}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <p class="ar">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616; &#1649;&#1604;&#1604;&#1614;&#1617;&#1607;&#1616; &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1614;&#1606;&#1616; &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1605;&#1616;</p>
+          <p class="ar" lang="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
           <p class="lead">In the name of Allah,<br>the Most Gracious, the Most Merciful</p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it lead">&ldquo;And We created you in pairs...&rdquo;</p>
@@ -594,10 +637,10 @@ html.sealed,html.sealed body{overflow:hidden}
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
           <p class="lead">Together with our families<br>we cordially invite you to the<br><span class="it">Nikah Ceremony of</span></p>
-          <h2 class="names">Aafiya<span class="amp">&amp;</span>Nouman</h2>
-          <p class="big">Saturday, 7th November 2026<br>5:00 PM</p>
+          <h2 class="names shimmer">Aairaf<span class="amp">&amp;</span>Maryam</h2>
+          <p class="big">Friday, 6th November 2026<br>4:00 PM</p>
           <svg class="icon-lg" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-masjid"/></svg>
-          <p class="big">Nawab Ayaz Masjid<br><span class="label" style="font-weight:400">Dockyard Road, Mumbai</span></p>
+          <p class="big">Shafai Masjid<br><span class="label" style="font-weight:400">Dockyard Road, Mumbai</span></p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it small">Your presence will make our day<br>more special</p>
         </div>
@@ -620,12 +663,12 @@ html.sealed,html.sealed body{overflow:hidden}
           <p class="lead">With the blessings of</p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <div>
-            <p class="label">Bride&rsquo;s Father</p>
-            <p class="big">Mehmood Husain Miya Bamne</p>
+            <p class="label">Groom&rsquo;s Father</p>
+            <p class="big">Mahmood Husain Miya Bamne</p>
           </div>
           <div>
-            <p class="label">Groom&rsquo;s Father</p>
-            <p class="big">Niyaz Tajuddin Fakih</p>
+            <p class="label">Bride&rsquo;s Father</p>
+            <p class="big">Mohd Irfan Abubaker Patel</p>
           </div>
           <div>
             <p class="label">Family / Grandparents</p>
@@ -647,23 +690,33 @@ html.sealed,html.sealed body{overflow:hidden}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <h2 class="title">Wedding Events</h2>
+          <h2 class="title shimmer">Wedding Events</h2>
           <div class="evlist">
-            <div class="ev" style="--tint:#DCE8D2;--ico:#2F6B3C">
-              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-paisley"/></svg></div>
-              <div><h3>Mehandi</h3><p>5th November 2026</p></div>
-            </div>
-            <div class="ev" style="--tint:#F7D3DC;--ico:#C24E73">
-              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-marigold"/></svg></div>
-              <div><h3>Haldi</h3><p>3rd November 2026</p></div>
-            </div>
             <div class="ev" style="--tint:#F1E7D0;--ico:#254234">
               <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-masjid"/></svg></div>
-              <div><h3>Nikah</h3><p>7th November 2026<br>5:00 PM<br>Nawab Ayaz Masjid,<br>Dockyard Road, Mumbai</p></div>
+              <div>
+                <h3>Nikah</h3>
+                <p class="when">Friday, 6th November 2026<br>4:00 PM</p>
+                <p class="venue"><b>Shafai Masjid</b><br>Dockyard Road, Mumbai</p>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Shafai+Masjid+Dockyard+Road+Mumbai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>Open in Google Maps</a>
+              </div>
+            </div>
+            <div class="ev" style="--tint:#DCE8D2;--ico:#2F6B3C">
+              <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-rings"/></svg></div>
+              <div>
+                <h3>Reception</h3>
+                <p class="when">Friday, 6th November 2026<br>8:00 PM</p>
+                <p class="venue"><b>Neighbourhood House</b><br>near Nagpada Police Station, Mumbai</p>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Nagpada+Neighbourhood+House+Sophia+Zuber+Road+Nagpada+Mumbai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>Open in Google Maps</a>
+              </div>
             </div>
             <div class="ev" style="--tint:#F3E4C2;--ico:#A47E2B">
               <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cloche"/></svg></div>
-              <div><h3>Reception / Walima</h3><p>7th November 2026</p></div>
+              <div>
+                <h3>Walima</h3>
+                <p class="venue"><b>Najam Baug Trust</b><br>Noor Baug, Dongri, Mumbai</p>
+                <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Najam+Baug+Trust+Samantbhai+Nanji+Marg+Noor+Baug+Dongri+Mumbai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>Open in Google Maps</a>
+              </div>
             </div>
           </div>
         </div>
@@ -672,7 +725,7 @@ html.sealed,html.sealed body{overflow:hidden}
   </section>
 
   <!-- 6 . Countdown -->
-  <section class="screen night">
+  <section class="screen night scene">
     <div class="bg">
       <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
       <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
@@ -685,21 +738,21 @@ html.sealed,html.sealed body{overflow:hidden}
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
           <p class="lead">Countdown to</p>
-          <h2 class="title">Nikah</h2>
-          <div class="cd" id="clock" data-target="2026-11-07T17:00:00+05:30">
+          <h2 class="title shimmer">Nikah</h2>
+          <div class="cd" id="clock" data-target="2026-11-06T16:00:00+05:30">
             <div><b id="cd-d">&mdash;</b><small>Days</small></div>
             <div><b id="cd-h">&mdash;</b><small>Hours</small></div>
             <div><b id="cd-m">&mdash;</b><small>Minutes</small></div>
             <div><b id="cd-s">&mdash;</b><small>Seconds</small></div>
           </div>
-          <p class="big">7th November 2026<br><span style="font-weight:400;font-size:.9em">Saturday &nbsp;&middot;&nbsp; 5:00 PM</span></p>
+          <p class="big">6th November 2026<br><span style="font-weight:400;font-size:.9em">Friday &nbsp;&middot;&nbsp; 4:00 PM</span></p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it lead">&ldquo;Two hearts, one Deen,<br>a lifetime together.&rdquo;</p>
         </div>
       </div>
     </div>
   </section>
-  <!-- 7 . Venue -->
+  <!-- 7 . RSVP -->
   <section class="screen cream">
     <div class="bg">
       <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
@@ -709,86 +762,13 @@ html.sealed,html.sealed body{overflow:hidden}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <h2 class="title">Venue</h2>
-          <div class="photo">
-            <svg viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
-            <span>Venue photo</span>
-          </div>
-          <div>
-            <p class="big">Najam Baug Hall</p>
-            <p class="label">weddings, birthdays and parties.</p>
-          </div>
-          <div class="addr">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>
-            <p>Samantbhai Nanji Marg,<br>Noor Baug, Dongri, Umerkhadi,<br>Mumbai, Maharashtra 400009</p>
-          </div>
-          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Najam+Baug+Hall+Samantbhai+Nanji+Marg+Dongri+Mumbai" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin"/></svg>
-            Open in Google Maps
-          </a>
-          <div class="map" aria-hidden="true">
-            <svg viewBox="0 0 320 180">
-              <rect width="320" height="180" fill="#EFEBDF"/>
-              <path d="M0 60 C80 50 120 90 200 70 S300 40 320 55" fill="none" stroke="#D9D2C0" stroke-width="10"/>
-              <path d="M0 60 C80 50 120 90 200 70 S300 40 320 55" fill="none" stroke="#FFF" stroke-width="6"/>
-              <path d="M40 0 L70 180M150 0 L130 180M250 0 L270 180" stroke="#E2DCCB" stroke-width="7"/>
-              <path d="M40 0 L70 180M150 0 L130 180M250 0 L270 180" stroke="#FFF" stroke-width="4"/>
-              <path d="M0 130 C60 140 120 120 320 135" fill="none" stroke="#BFD3DE" stroke-width="14"/>
-              <g transform="translate(160 78)">
-                <path d="M0 14s-9-8-9-14a9 9 0 1 1 18 0c0 6-9 14-9 14z" fill="#C7433E"/>
-                <circle r="3" fill="#FFF"/>
-              </g>
-              <rect x="176" y="66" width="98" height="20" rx="3" fill="#FFF" opacity=".9"/>
-              <text x="225" y="80" font-family="Cormorant Garamond, Georgia, serif" font-size="12" text-anchor="middle" fill="#2E3530">Najam Baug Hall</text>
-            </svg>
-          </div>
-          <p class="small muted">Click the button above for exact location</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8 . Dress Code -->
-  <section class="screen cream">
-    <div class="bg">
-      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
-      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
-    </div>
-    <div class="scroll">
-      <div class="frame">
-        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
-        <div class="inner">
-          <h2 class="title">Dress Code</h2>
-          <p class="lead">Kindly wear the following colours<br>to make our day even more special</p>
-          <div class="dress">
-            <div class="dr"><span class="sw" style="background:linear-gradient(135deg,#5A9457,#2F6039)"></span><div><h3>Mehandi</h3><p>Green</p></div></div>
-            <div class="dr"><span class="sw" style="background:linear-gradient(135deg,#F3AEC2,#D66A8E)"></span><div><h3>Haldi</h3><p>Pink</p></div></div>
-            <div class="dr"><span class="sw" style="background:linear-gradient(135deg,#FFFFFF,#EFE9DE);border-color:#C8A862"></span><div><h3>Nikah</h3><p>White</p></div></div>
-            <div class="dr"><span class="sw" style="background:repeating-linear-gradient(90deg,#DDBC72 0 9px,#C29A4F 9px 13px,#EAD196 13px 22px)"></span><div><h3>Reception / Walima</h3><p>Golden &amp; Light Colours</p></div></div>
-          </div>
-          <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
-          <p class="it small">Your presence is the greatest gift,<br>but if you wish to dress up,<br>here are our colour suggestions!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- 9 . RSVP -->
-  <section class="screen cream">
-    <div class="bg">
-      <svg class="sprig bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
-      <svg class="sprig br" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
-    </div>
-    <div class="scroll">
-      <div class="frame">
-        <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
-        <div class="inner">
-          <h2 class="title">RSVP</h2>
+          <h2 class="title shimmer">RSVP</h2>
           <p class="lead">Please confirm your attendance<br>by contacting us on WhatsApp</p>
           <svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
           <div class="numbox">
             9970940525<br>9969323397<br>9987427622
           </div>
-          <a class="btn" href="https://wa.me/919970940525?text=Assalamu%20Alaikum%2C%20I%20am%20confirming%20my%20attendance%20for%20Aafiya%20%26%20Nouman%27s%20Nikah." target="_blank" rel="noopener">
+          <a class="btn" href="https://wa.me/919970940525?text=Assalamu%20Alaikum%2C%20I%20am%20confirming%20my%20attendance%20for%20Aairaf%20%26%20Maryam%27s%20Nikah." target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
             Chat on WhatsApp
           </a>
@@ -797,8 +777,8 @@ html.sealed,html.sealed body{overflow:hidden}
     </div>
   </section>
 
-  <!-- 10 . Blessing -->
-  <section class="screen dusk">
+  <!-- 8 . Blessing -->
+  <section class="screen dusk scene">
     <div class="bg">
       <svg class="mosque" viewBox="0 0 400 120" aria-hidden="true"><use href="#mosque"/></svg>
       <svg class="sprig tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#sprig"/></svg>
@@ -808,18 +788,18 @@ html.sealed,html.sealed body{overflow:hidden}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <p class="ar">&#1649;&#1604;&#1652;&#1614;&#1605;&#1618;&#1583;&#1615; &#1604;&#1616;&#1604;&#1614;&#1617;&#1614;&#1617;&#1607;&#1616;</p>
+          <p class="ar" lang="ar">ٱلْحَمْدُ لِلَّٰهِ</p>
           <p class="lead">May Allah bring barakah<br>in our union and make our journey<br>together filled with love, happiness<br>and endless blessings.</p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it lead">With love,</p>
-          <h2 class="names" style="font-size:clamp(2.2rem,10vw,2.9rem)">Aafiya &amp; Nouman</h2>
+          <h2 class="names shimmer" style="font-size:clamp(2.2rem,10vw,2.9rem)">Aairaf &amp; Maryam</h2>
           <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 11 . JazakAllah -->
+  <!-- 9 . JazakAllah -->
   <section class="screen night">
     <div class="bg">
       <svg class="lantern a" viewBox="0 0 40 100" aria-hidden="true"><use href="#lantern"/></svg>
@@ -833,8 +813,8 @@ html.sealed,html.sealed body{overflow:hidden}
       <div class="frame">
         <svg class="arch" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><use href="#arch-path"/></svg>
         <div class="inner">
-          <p class="ar">&#1649;&#1604;&#1652;&#1614;&#1605;&#1618;&#1583;&#1615; &#1604;&#1616;&#1604;&#1614;&#1617;&#1614;&#1617;&#1607;&#1616;</p>
-          <h2 class="names" style="font-size:clamp(2.4rem,11vw,3.2rem)">JazakAllah</h2>
+          <p class="ar" lang="ar">جَزَاكَ ٱللَّٰهُ خَيْرًا</p>
+          <h2 class="names shimmer" style="font-size:clamp(2.4rem,11vw,3.2rem)">JazakAllah</h2>
           <p class="lead">for being a part of<br>our special day</p>
           <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
         </div>
@@ -859,10 +839,49 @@ html.sealed,html.sealed body{overflow:hidden}
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
   root.classList.add('sealed');
+
+  /* scatter sparkles over every page and the envelope; shooting stars on night pages */
+  function sprinkle(host, count, maxTop){
+    for (var i = 0; i < count; i++) {
+      var s = document.createElement('span');
+      var size = (6 + Math.random() * 11).toFixed(1);
+      s.className = 'spark';
+      s.style.cssText = 'left:' + (Math.random() * 96).toFixed(1) + '%;top:' + (Math.random() * maxTop).toFixed(1) + '%;width:' + size + 'px;height:' + size + 'px;animation-duration:' + (2.8 + Math.random() * 2.8).toFixed(2) + 's;animation-delay:-' + (Math.random() * 5).toFixed(2) + 's';
+      host.appendChild(s);
+    }
+  }
+  document.querySelectorAll('.screen .bg').forEach(function(bg){ sprinkle(bg, 18, 82); });
+  sprinkle(env, 12, 95);
+  document.querySelectorAll('.night .bg').forEach(function(bg, i){
+    var m = document.createElement('span');
+    m.className = 'meteor';
+    m.style.animationDelay = '-' + (3 + i * 3.3).toFixed(1) + 's';
+    bg.appendChild(m);
+  });
+
+  /* text rises in page by page; skipped when the phone asks for reduced motion */
+  var canReveal = 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canReveal) {
+    root.classList.add('reveal');
+    document.querySelectorAll('.inner').forEach(function(inner){
+      Array.prototype.forEach.call(inner.children, function(el, i){ el.style.setProperty('--i', i); });
+    });
+  }
+  function startReveal(){
+    if (!canReveal) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.screen').forEach(function(s){ io.observe(s); });
+  }
+
   function openEnvelope(){
     if (env.classList.contains('opening')) return;
     env.classList.add('opening');
     root.classList.remove('sealed');
+    setTimeout(startReveal, 900);
     setTimeout(function(){ env.hidden = true; }, 1900);
   }
   env.addEventListener('click', openEnvelope);
