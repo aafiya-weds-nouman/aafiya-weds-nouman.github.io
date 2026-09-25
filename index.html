@@ -1,8 +1,10 @@
+<meta charset="utf-8">
 <title>Aafiya &amp; Nouman</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&text=%DA%A9%DA%BE%D9%88%D9%84%D9%86%DB%92%20%DA%A9%DB%92%20%D9%84%DB%8C%DB%92%20%D9%B9%DB%8C%D9%BE%20%DA%A9%D8%B1%DB%8C%DA%BA&display=swap">
 
 <style>
 /* Single-theme by design: parchment day screens and night-sky screens paint their own grounds. */
@@ -21,7 +23,7 @@
   --arabic:'Amiri','Scheherazade New','Traditional Arabic',serif;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{box-sizing:border-box;scroll-behavior:smooth}
+html{box-sizing:border-box}
 body{
   margin:0;
   background:var(--green-deep);
@@ -33,18 +35,13 @@ body{
   overflow-x:hidden;
 }
 
-/* ---- deck: a normal vertical stack of full-bleed sections ---- */
-.deck{
-  display:block;
-  scroll-snap-type:y proximity;
-}
+/* ---- sections: a plain vertical stack of full-bleed screens ---- */
 .screen{
   position:relative;
   width:100%;
   min-height:100vh;
   min-height:100dvh;
   overflow:hidden;
-  scroll-snap-align:start;
 }
 .bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .scroll{
@@ -257,8 +254,82 @@ h1,h2,h3,p{margin:0}
   transition:width .1s linear;
 }
 
+/* ---- envelope: the first screen; tapping it lifts the flap and breaks the seal ---- */
+html.sealed,html.sealed body{overflow:hidden}
+.envelope{
+  position:fixed;inset:0;z-index:50;
+  overflow:hidden;cursor:pointer;
+  perspective:1400px;
+  touch-action:none;overscroll-behavior:contain;
+  -webkit-tap-highlight-color:transparent;
+  background:#134A33;
+  transition:opacity .8s ease .95s,transform 1s ease .95s;
+}
+.envelope[hidden]{display:none}
+.envelope::after{
+  content:"";position:absolute;inset:0;z-index:6;pointer-events:none;
+  opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.envelope:focus-visible{outline:2px solid var(--gold);outline-offset:-8px}
+.env-folds{position:absolute;inset:0;display:block;width:100%;height:100%}
+.env-flap-wrap{
+  position:absolute;top:0;left:0;right:0;height:55%;z-index:2;
+  transform-origin:50% 0;
+  transition:transform 1s cubic-bezier(.55,.05,.25,1) .15s;
+  filter:drop-shadow(0 10px 14px rgba(0,0,0,.4));
+}
+.env-flap{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%);background:linear-gradient(180deg,#1F6C49 0%,#175A3D 100%)}
+.env-edge{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.env-flourish{position:absolute;top:9%;left:50%;width:min(62%,280px);transform:translateX(-50%);color:var(--gold)}
+.env-seal{
+  position:absolute;left:50%;top:55%;z-index:3;
+  width:132px;height:132px;margin:-66px 0 0 -66px;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.45));
+  animation:breathe 2.8s ease-in-out infinite;
+}
+.seal-half{position:absolute;inset:0;transition:transform .75s cubic-bezier(.3,.7,.2,1),opacity .6s ease .15s}
+.seal-half svg{display:block;width:100%;height:100%}
+.seal-half.l{clip-path:polygon(0 0,53% 0,48% 30%,55% 54%,47% 77%,52% 100%,0 100%)}
+.seal-half.r{clip-path:polygon(52% 0,100% 0,100% 100%,51% 100%,46% 77%,54% 54%,47% 30%)}
+.seal-mono{
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-62%);
+  text-align:center;font-family:var(--arabic);font-size:31px;line-height:1;
+  color:#6A4712;text-shadow:0 1px 0 rgba(255,238,190,.7),0 -1px 1px rgba(80,52,8,.35);
+}
+.seal-mono i{font-family:var(--serif);font-size:.62em;margin:0 .15em;vertical-align:.25em}
+.env-hint{
+  position:absolute;left:0;right:0;top:69%;z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-align:center;color:#E2C57A;
+  transition:opacity .3s ease;
+  animation:glow 2.8s ease-in-out infinite;
+}
+.env-hint .en{font-style:italic;font-size:1.75rem;letter-spacing:.02em}
+.env-hint .ur{font-family:'Noto Nastaliq Urdu',var(--arabic);font-size:1.15rem;line-height:2.2}
+.env-hint .orn{color:var(--gold)}
+.envelope.opening{opacity:0;transform:scale(1.08);pointer-events:none}
+.envelope.opening .env-flap-wrap{transform:rotateX(180deg)}
+.envelope.opening .env-seal,.envelope.opening .env-hint{animation:none}
+.envelope.opening .env-hint{opacity:0}
+.envelope.opening .seal-half.l{transform:translate(-36px,18px) rotate(-20deg);opacity:0}
+.envelope.opening .seal-half.r{transform:translate(36px,18px) rotate(20deg);opacity:0}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes glow{0%,100%{opacity:.8}50%{opacity:1}}
+
+/* ---- scroll hint on the cover ---- */
+.cue{
+  position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  pointer-events:none;
+  transform:translateX(-50%);
+  animation:cue 2.2s ease-in-out infinite;
+}
+.cue svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@keyframes cue{0%,100%{transform:translate(-50%,0);opacity:.75}50%{transform:translate(-50%,6px);opacity:1}}
+
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
   *{transition:none !important;animation:none !important}
 }
 </style>
@@ -385,11 +456,83 @@ h1,h2,h3,p{margin:0}
 
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
     <symbol id="i-wa" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.5 8.5 0 1 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9.2 8.6c.2 2.4 3.3 5.6 5.8 6.1l1.4-1.4 1.9.9-.4 1.9c-3.9.5-9.3-4.8-8.8-8.7l1.8-.5.9 1.7z" fill="currentColor"/></symbol>    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.3 6c-2.3 4.4-9.3 9-9.3 9z" fill="currentColor"/></symbol>
-    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></symbol>
+
+    <radialGradient id="waxFill" cx="36%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#F7E08F"/>
+      <stop offset=".5" stop-color="#D5A946"/>
+      <stop offset="1" stop-color="#9A6D22"/>
+    </radialGradient>
+    <radialGradient id="waxInner" cx="62%" cy="68%" r="80%">
+      <stop offset="0" stop-color="#EDC86A"/>
+      <stop offset="1" stop-color="#B8893A"/>
+    </radialGradient>
+    <filter id="waxEdge" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="seal" viewBox="0 0 140 140">
+      <circle cx="70" cy="70" r="60" fill="url(#waxFill)" filter="url(#waxEdge)"/>
+      <circle cx="70" cy="70" r="48" fill="url(#waxInner)"/>
+      <circle cx="70" cy="70" r="48" fill="none" stroke="#FBE6A6" stroke-opacity=".75" stroke-width="1.4"/>
+      <circle cx="70" cy="70" r="51.5" fill="none" stroke="#7A5616" stroke-opacity=".45"/>
+      <g fill="none" stroke="#7A5616" stroke-opacity=".25">
+        <rect x="42" y="42" width="56" height="56"/>
+        <rect x="42" y="42" width="56" height="56" transform="rotate(45 70 70)"/>
+      </g>
+    </symbol>
   </defs>
 </svg>
 
-<div class="deck" id="deck">
+<noscript><style>.envelope{display:none}</style></noscript>
+<div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap to open the invitation">
+  <svg class="env-folds" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="envSideL" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#0B3222"/>
+        <stop offset="1" stop-color="#11432E"/>
+      </linearGradient>
+      <linearGradient id="envSideR" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0" stop-color="#0B3222"/>
+        <stop offset="1" stop-color="#11432E"/>
+      </linearGradient>
+      <linearGradient id="envBottom" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#155238"/>
+        <stop offset="1" stop-color="#1C6546"/>
+      </linearGradient>
+    </defs>
+    <polygon points="0,0 50,57 0,100" fill="url(#envSideL)"/>
+    <polygon points="100,0 50,57 100,100" fill="url(#envSideR)"/>
+    <polygon points="0,100 50,53 100,100" fill="url(#envBottom)"/>
+    <polyline points="0,100 50,53 100,100" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <div class="env-flap-wrap">
+    <div class="env-flap">
+      <svg class="env-flourish" viewBox="0 0 220 60" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M110 4l2.6 7.4 7.4 2.6-7.4 2.6-2.6 7.4-2.6-7.4-7.4-2.6 7.4-2.6z" fill="currentColor" stroke="none"/>
+        <circle cx="110" cy="31" r="1.6" fill="currentColor" stroke="none"/>
+        <g id="flourish-half">
+          <path d="M100 26c-9 9-24 11-32 3-6-6-3-15 4-15 6 0 8 7 3 9"/>
+          <path d="M68 29c-16 12-38 16-62 13"/>
+          <path d="M90 33c-4 9-16 14-27 11"/>
+          <circle cx="5" cy="42" r="2" fill="currentColor" stroke="none"/>
+        </g>
+        <use href="#flourish-half" transform="matrix(-1 0 0 1 220 0)"/>
+      </svg>
+    </div>
+    <svg class="env-edge" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,0 50,100 100,0" fill="none" stroke="#C8A862" stroke-opacity=".6" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
+  </div>
+  <div class="env-seal" aria-hidden="true">
+    <div class="seal-half l"><svg viewBox="0 0 140 140"><use href="#seal"/></svg><div class="seal-mono" dir="rtl" lang="ar">&#1593; <i>&amp;</i> &#1606;</div></div>
+    <div class="seal-half r"><svg viewBox="0 0 140 140"><use href="#seal"/></svg><div class="seal-mono" dir="rtl" lang="ar">&#1593; <i>&amp;</i> &#1606;</div></div>
+  </div>
+  <div class="env-hint" aria-hidden="true">
+    <p class="en">Tap to open</p>
+    <p class="ur" dir="rtl" lang="ur">&#1705;&#1726;&#1608;&#1604;&#1606;&#1746; &#1705;&#1746; &#1604;&#1740;&#1746; &#1657;&#1740;&#1662; &#1705;&#1585;&#1740;&#1722;</p>
+    <svg class="orn" viewBox="0 0 140 20"><use href="#orn"/></svg>
+  </div>
+</div>
+
+<main>
 
   <!-- 1 . Cover -->
   <section class="screen night">
@@ -410,10 +553,10 @@ h1,h2,h3,p{margin:0}
             <p class="it small muted">In the loving memory of</p>
             <p class="lead" style="font-weight:500">Late Haji Husain Miya Bamne<br>&amp; Late Haji Murad Bamne</p>
           </div>
-          <button class="btn" type="button" data-next>Tap to Open</button>
         </div>
       </div>
     </div>
+    <div class="cue" aria-hidden="true">Scroll<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
   </section>
   <!-- 2 . Bismillah -->
   <section class="screen cream">
@@ -433,7 +576,6 @@ h1,h2,h3,p{margin:0}
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it lead">&ldquo;And We created you in pairs...&rdquo;</p>
           <p class="small muted">(Qur&rsquo;an 78:8)</p>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -458,7 +600,6 @@ h1,h2,h3,p{margin:0}
           <p class="big">Nawab Ayaz Masjid<br><span class="label" style="font-weight:400">Dockyard Road, Mumbai</span></p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it small">Your presence will make our day<br>more special</p>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -492,7 +633,6 @@ h1,h2,h3,p{margin:0}
           </div>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it small">May Allah accept<br>our union and bless us<br>with a beautiful future.</p>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -526,7 +666,6 @@ h1,h2,h3,p{margin:0}
               <div><h3>Reception / Walima</h3><p>7th November 2026</p></div>
             </div>
           </div>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -556,7 +695,6 @@ h1,h2,h3,p{margin:0}
           <p class="big">7th November 2026<br><span style="font-weight:400;font-size:.9em">Saturday &nbsp;&middot;&nbsp; 5:00 PM</span></p>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it lead">&ldquo;Two hearts, one Deen,<br>a lifetime together.&rdquo;</p>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -605,7 +743,6 @@ h1,h2,h3,p{margin:0}
             </svg>
           </div>
           <p class="small muted">Click the button above for exact location</p>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -631,7 +768,6 @@ h1,h2,h3,p{margin:0}
           </div>
           <svg class="orn" viewBox="0 0 140 20" aria-hidden="true"><use href="#orn"/></svg>
           <p class="it small">Your presence is the greatest gift,<br>but if you wish to dress up,<br>here are our colour suggestions!</p>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -656,7 +792,6 @@ h1,h2,h3,p{margin:0}
             <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
             Chat on WhatsApp
           </a>
-          <button class="btn" type="button" data-next style="background:transparent;color:var(--green);box-shadow:none">Next</button>
         </div>
       </div>
     </div>
@@ -679,7 +814,6 @@ h1,h2,h3,p{margin:0}
           <p class="it lead">With love,</p>
           <h2 class="names" style="font-size:clamp(2.2rem,10vw,2.9rem)">Aafiya &amp; Nouman</h2>
           <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>
-          <button class="btn" type="button" data-next>Next</button>
         </div>
       </div>
     </div>
@@ -708,7 +842,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-</div>
+</main>
 <div class="progress" id="progress"></div>
 
 <button class="sound" type="button" id="sound" aria-label="Pause nasheed" hidden>
@@ -719,14 +853,21 @@ h1,h2,h3,p{margin:0}
 
 <script>
 (function(){
-  var deck = document.getElementById('deck');
-
-  deck.querySelectorAll('[data-next]').forEach(function(b){
-    b.addEventListener('click', function(){
-      var host = b.closest('.screen');
-      var next = host && host.nextElementSibling;
-      if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+  /* envelope: page stays locked at the top until it's opened */
+  var env = document.getElementById('envelope');
+  var root = document.documentElement;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  root.classList.add('sealed');
+  function openEnvelope(){
+    if (env.classList.contains('opening')) return;
+    env.classList.add('opening');
+    root.classList.remove('sealed');
+    setTimeout(function(){ env.hidden = true; }, 1900);
+  }
+  env.addEventListener('click', openEnvelope);
+  env.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
   });
 
   /* scroll progress bar */
